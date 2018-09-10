@@ -1,9 +1,25 @@
 package com.accenture;
 
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+@Entity
 public class Product {
+	
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	@Column
 	private String name;
+	@Column
 	private String description;
+	
+	public Product() {
+		
+	}
 	
 	public Product(int id, String name, String description) {
 		this.id = id;
@@ -33,5 +49,7 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}				
+	}
+		
+				
 }

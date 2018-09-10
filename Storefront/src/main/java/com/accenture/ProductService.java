@@ -1,35 +1,35 @@
 package com.accenture;
 
-import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class ProductService {
 	
 	@Autowired
-	private ProductDao productDB;
+	private ProductRepository productDB;
 	
-	public Collection<Product> getAllProducts(){
-		return this.productDB.getAllProducts();
+	public Iterable<Product> getAllProducts(){
+		return this.productDB.findAll();
 	}
 
-	public Product getProductById(int id) {
-		return this.productDB.getProductById(id);
+	public Optional<Product> getProductById(int id) {
+		return this.productDB.findById(id);
 	}
 
 	public void removeProductById(int id) {
-		this.productDB.removeProductById(id);
+		this.productDB.deleteById(id);
 		
 	}
 	
 	public void updateProduct(Product product){
-		this.productDB.updateProduct(product);
+		Product P = this.productDB.getOne(product.getId());
+		this.productDB.save(P);
 	}
 	
 	public void insertStudent(Product product){
-		this.productDB.insertStudent(product);
+		this.productDB.save(product);
 	}
 }
