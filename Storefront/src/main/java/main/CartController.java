@@ -29,7 +29,7 @@ public class CartController {
 		return this.productService.getProductById(id);
 	}
 	
-	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value="/products/{product.id}", method = RequestMethod.DELETE)
 	public void deleteProductById(@PathVariable("id") int id) {
 		productService.removeProductById(id);
 	}
@@ -48,5 +48,21 @@ public class CartController {
 	@GetMapping("add")
 	public Product AddProduct() {
 		return new Product();
+	}
+	
+	@ModelAttribute("products")
+	@GetMapping("cart")
+	public Iterable<Product> GetCart(){
+		return this.productService.getAllProducts();
+	}
+	
+	@PostMapping("products/delete")
+	public void deleteFromCart(@RequestBody Product product) {
+		this.productService.delete(product);
+	}
+	
+	@GetMapping("delete/{product.id}")
+	public void deleteFromCart(@PathVariable("product.id") int id) {
+		this.productService.removeProductById(id);
 	}
 }

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head> 
+	    <title>Getting Started: Serving Web Content</title> 
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<h3>Welcome, select a product</h3>
+	    <h1>Dropdown</h1>
+		<div class="form-group row">
+		<table>
+		    <thead>
+		          <tr>
+		              <th>Name</th>
+		              <th>Description</th>
+		              <th>Remove</th>
+		          </tr>
+		    </thead>
+		    <tbody th:each="product : ${products}">
+		         <tr>
+					<td th:text="${product.name}">Name</td>
+					<td th:text="${product.description}">Description</td>
+					<td><a th:method="delete" th:href="|@{/delete}/${product.id}|" class="btn btn-danger">Delete</a></td>
+		         </tr>   
+		    </tbody>
+		    </table>
+		</div>
+	</body>
+</html>

@@ -24,6 +24,10 @@ public class ProductService {
 		
 	}
 	
+	public void delete(Product product) {
+		this.productDB.delete(product);
+	}
+	
 	public void updateProduct(Product product){
 		Product P = this.productDB.getOne(product.getId());
 		this.productDB.save(P);
