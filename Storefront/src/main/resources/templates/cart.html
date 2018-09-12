@@ -3,27 +3,70 @@
 	<head> 
 	    <title>Getting Started: Serving Web Content</title> 
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <!-- Compiled and minified CSS -->
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   	
 	</head>
 	<body>
-		<h3>Welcome, select a product</h3>
-	    <h1>Dropdown</h1>
+	<div class="row">
+		<h3 class="col s10">Welcome to the store</h3>
+		<button data-target="modal1" class="col s2 waves-effect waves-light btn modal-trigger">My cart</button>
+		</div>
 		<div class="form-group row">
-		<table>
-		    <thead>
+			<table class="col s12" id="store">
+		    	<thead>
 		          <tr>
 		              <th>Name</th>
 		              <th>Description</th>
-		              <th>Remove</th>
+		              <th>Quantity</th>
 		          </tr>
 		    </thead>
-		    <tbody th:each="product : ${products}">
-		         <tr>
+		    <tbody>
+		         <tr th:each="product : ${products}">
 					<td th:text="${product.name}">Name</td>
 					<td th:text="${product.description}">Description</td>
-					<td><a th:method="delete" th:href="|@{/delete}/${product.id}|" class="btn btn-danger">Delete</a></td>
+					<td>					
+						<form id="addQuantityToCart" action="addQuantityToCart" th:method="addQuantityToCart">
+						<input type="number" required name ="quantity"/>						  					
+						  <input type="hidden" th:value="${product.id}" name="productId">
+						  <button type="submit" formmethod="post" class="waves-effect waves-light btn btn-danger">Add</button>
+						</form>
+					</td>
 		         </tr>   
 		    </tbody>
 		    </table>
+		     <!-- Modal Trigger -->				  
 		</div>
+		<!-- Modal Structure -->
+		  <div id="modal1" class="modal">
+		    <div class="modal-content">
+		      <table id="cart">
+		    	<thead>
+		          <tr>
+		              <th>Name</th>
+		              <th>Quantity</th>
+		              <th>Remove</th>
+		          </tr>
+			    </thead>
+			    <tbody>
+			         <tr th:each="cartItem : ${cartItems}">
+						<td th:text="${cartItem.ProductKey}">Name</td>
+						<td th:text="${cartItem.quantity}">Quantity</td>
+						<td><a th:method="delete" th:href="|@{/delete}/${cartItem.id}|" class="waves-effect waves-light btn btn-danger">Delete</a></td>
+			         </tr>   
+			    </tbody>
+		    </table>
+		    </div>
+		    <div class="modal-footer">
+		      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+		    </div>
+		  </div>
 	</body>
+	<!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('.modal').modal();
+      });
+    </script>
 </html>

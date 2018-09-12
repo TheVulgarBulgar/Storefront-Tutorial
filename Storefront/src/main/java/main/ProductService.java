@@ -33,7 +33,7 @@ public class ProductService {
 		this.productDB.save(P);
 	}
 	
-	public void insertStudent(Product product){
+	public void insertProduct(Product product){
 		this.productDB.save(product);
 	}
 }
