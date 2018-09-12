@@ -40,19 +40,28 @@
 		<!-- Modal Structure -->
 		  <div id="modal1" class="modal">
 		    <div class="modal-content">
+		    <h4>Cart</h4><br>
 		      <table id="cart">
 		    	<thead>
 		          <tr>
 		              <th>Name</th>
 		              <th>Quantity</th>
 		              <th>Remove</th>
+		              <th>Change quantity</th>
 		          </tr>
 			    </thead>
 			    <tbody>
 			         <tr th:each="cartItem : ${cartItems}">
-						<td th:text="${cartItem.ProductKey}">Name</td>
+						<td th:text="${cartItem.product.name}">Name</td>
 						<td th:text="${cartItem.quantity}">Quantity</td>
 						<td><a th:method="delete" th:href="|@{/delete}/${cartItem.id}|" class="waves-effect waves-light btn btn-danger">Delete</a></td>
+						<td>					
+							<form id="addQuantityToCart" action="addQuantityToCart" th:method="addQuantityToCart">
+								<input type="number" required name ="quantity"/>						  					
+							  	<input type="hidden" th:value="${cartItem.product.id}" name="productId">
+							  	<button type="submit" formmethod="post" class="waves-effect waves-light btn btn-danger">Add</button>
+							</form>
+						</td>
 			         </tr>   
 			    </tbody>
 		    </table>

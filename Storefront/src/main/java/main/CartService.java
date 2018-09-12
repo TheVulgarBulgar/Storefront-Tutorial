@@ -28,10 +28,10 @@ public class CartService {
 		this.cartItemDB.delete(cartItem);
 	}
 	
-	public void insertCartItem(CartItem cartItem){		
-		try{
-			
-			Optional<CartItem> P = this.cartItemDB.findAll().stream().filter(c -> c.getProductKey() == cartItem.getProductKey()).findFirst();
+	public void insertCartItem(CartItem cartItem){	
+		
+		try{			
+			Optional<CartItem> P = this.cartItemDB.findAll().stream().filter(c -> c.getProduct() == cartItem.getProduct()).findFirst();
 			CartItem newCartItem = P.get();
 			newCartItem.setQuantity(cartItem.getQuantity());			
 			System.out.println(String.valueOf(newCartItem.getQuantity()));

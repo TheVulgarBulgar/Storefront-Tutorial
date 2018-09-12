@@ -1,14 +1,9 @@
 package main;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class ProductAndCartController {
@@ -31,20 +25,23 @@ public class ProductAndCartController {
 	@PostMapping(value="/addQuantityToCart")
 	public String insertCartItem(@RequestParam(value="productId") int productId, @RequestParam(value="quantity") int quantity) {
 		
+		Optional<Product> P = this.productService.getProductById(productId);
+		Product product = P.get();
+		
 		CartItem cartItem = new CartItem();
-		cartItem.setProductKey(productId);
 		cartItem.setQuantity((short)quantity);
+		cartItem.setProduct(product);		
 		
 		System.out.println(String.valueOf(quantity));
 		
 		this.cartService.insertCartItem(cartItem);
 		
-		return "redirect:cart";
+		return "redirect:home";
 	}
 	
-	@GetMapping("cart")
+	@GetMapping("home")
 	public String cart() {		
-		return "cart";
+		return "home";
 	}
 	
 	// product service request methods
@@ -94,7 +91,8 @@ public class ProductAndCartController {
 	@GetMapping("delete/{cartItem.id}")
 	public String deleteCartItemFromCart(@PathVariable("cartItem.id") int id) {
 		this.cartService.removeCartItemById(id);
-		return "redirect:../cart";
+		System.out.println("this is our story");
+		return "redirect:../home";
 	}
 	
 	// product service reponse methods

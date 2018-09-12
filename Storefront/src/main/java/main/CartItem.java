@@ -1,10 +1,14 @@
 package main;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class CartItem {
@@ -13,17 +17,19 @@ public class CartItem {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@Column
-	private int productKey;
-	@Column
 	private short quantity;
+	
+	@OneToOne()
+    @JoinColumn(name = "productKey")
+	private Product product;
+
 	
 	public CartItem() {
 		
 	}
 	
-	public CartItem(int id, int productKey, short quantity) {
+	public CartItem(int id, short quantity) {
 		this.id = id;
-		this.productKey = productKey;
 		this.quantity = quantity;
 	}
 
@@ -35,19 +41,19 @@ public class CartItem {
 		this.id = id;
 	}
 
-	public int getProductKey() {
-		return productKey;
-	}
-
-	public void setProductKey(int productKey) {
-		this.productKey = productKey;
-	}
-
 	public short getQuantity() {
 		return quantity;
 	}
 
 	public void setQuantity(short quantity) {
 		this.quantity = quantity;
+	}
+	
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 }
