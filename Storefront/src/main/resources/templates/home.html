@@ -14,7 +14,7 @@
 	      <a href="#" class="brand-logo">"Good as new" electronics</a>
 	      <ul id="nav-mobile" class="right">
 	        <li><a data-target="modal1" class="modal-trigger">My cart</a></li>
-	        <li><a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+	        <li><a th:href="@{'/logout'}" role="menuitem"> Logout</a>
 
    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
       <input hidden type="submit" value="Sign Out"/>
@@ -28,9 +28,9 @@
 	  </nav>
 	</div>
 	<div class="row">
-		<h3 class="col s10">Welcome to the store</h3>
+		<h3 class="col center s10">Electronics and goodies</h3>
 	</div>
-		<div class="form-group row">
+		<div class="form-group container row">
 			<table class="col s12" id="store">
 		    	<thead>
 		          <tr>
@@ -45,7 +45,7 @@
 					<td th:text="${product.description}">Description</td>
 					<td>					
 						<form id="addQuantityToCart" action="addQuantityToCart" th:method="addQuantityToCart">
-						<input type="number" required name ="quantity"/>						  					
+						<input type="number" max="99"  min="1" required name ="quantity"/>						  					
 						  <input type="hidden" th:value="${product.id}" name="productId">
 						  <button type="submit" formmethod="post" class="waves-effect waves-light btn btn-danger">Add</button>
 						</form>
@@ -75,9 +75,9 @@
 						<td><a th:method="delete" th:href="|@{/delete}/${cartItem.id}|" class="waves-effect waves-light btn btn-danger">Delete</a></td>
 						<td>					
 							<form id="addQuantityToCart" action="addQuantityToCart" th:method="addQuantityToCart">
-								<input type="number" required name ="quantity"/>						  					
+								<input type="number" max="99"  min="1" required name ="quantity"/>						  					
 							  	<input type="hidden" th:value="${cartItem.product.id}" name="productId">
-							  	<button type="submit" formmethod="post" class="waves-effect waves-light btn btn-danger">Add</button>
+							  	<button type="submit" formmethod="post" class="waves-effect waves-light btn btn-danger">Change</button>
 							</form>
 						</td>
 			         </tr>   

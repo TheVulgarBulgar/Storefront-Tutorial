@@ -1,7 +1,0 @@
-id;name;description
-1;Razer Blade 14;thin and light gaming laptop with SSD
-2;Bose P45;Noise-cancelling headphones with rich bass
-3;Schampoo;for all your hygiene needs
-4;SteelSeries Rival;High-DPI gaming mouse and a low price
-5;Sara Algoz;Project coordinator
-6;HDMI cable;Carry sound, video, and USB in one cable

@@ -6,25 +6,32 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">   
     </head>
     <body>
-    <div class="navbar-fixed">
-	<nav>
-	    <div class="nav-wrapper">
-	      <a href="#" class="brand-logo">"Good as new" electronics</a>
-	      <ul id="nav-mobile" class="center">     </ul>
-	    </div>
-	  </nav>
-	</div>
-        <div th:if="${param.error}">
-            Invalid username and password.
+	    <div class="navbar-fixed">
+		<nav>
+		    <div class="nav-wrapper">
+		      <a href="#" class="brand-logo">"Good as new" electronics</a>
+		      <ul id="nav-mobile" class="center">     </ul>
+		    </div>
+		  </nav>
+		</div>
+        <br><br>
+        <div class="container">
+        	<div class="container">
+        		<div class="container">
+        			<div th:if="${param.error}">
+			            Invalid username and password.
+			        </div>
+			        <div th:if="${param.logout}">
+			            You have been logged out.
+			        </div>
+			        <form th:action="@{/login}" method="post">
+			            <div><label> User Name : <input type="text" name="username"/> </label></div>
+			            <div><label> Password: <input type="password" name="password"/> </label></div><br>
+			            <div class="row"><button type="submit" formmethod="post" class="col s12 waves-effect waves-light btn btn-danger">Sign in</button></div>
+			        </form>
+		        </div>
+	        </div>
         </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
