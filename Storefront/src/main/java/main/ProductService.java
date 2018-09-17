@@ -1,8 +1,10 @@
 package main;
 
+import java.io.File;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,5 +37,9 @@ public class ProductService {
 	
 	public void insertProduct(Product product){
 		this.productDB.save(product);
+	}
+	
+	public File printProduct(File message) {
+		return message;
 	}
 }

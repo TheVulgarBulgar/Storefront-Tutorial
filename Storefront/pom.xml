@@ -59,7 +59,6 @@
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-data-jpa</artifactId>
-		    <version>2.0.4.RELEASE</version>
 		</dependency>
 		<dependency>
 		    <groupId>javax.persistence</groupId>
@@ -94,14 +93,47 @@
 		<dependency>
 		    <groupId>com.fasterxml.jackson.dataformat</groupId>
 		    <artifactId>jackson-dataformat-csv</artifactId>       
-		    <version>2.5.3</version>
 		</dependency>
-		
-		<!-- Spring Security -->
+		<dependency>
+			 <groupId>org.springframework.integration</groupId>
+			 <artifactId>spring-integration-core</artifactId>
+		</dependency>
+		<dependency>
+			 <groupId>org.springframework.integration</groupId>
+			 <artifactId>spring-integration-stream</artifactId>
+		 </dependency>
+	<!-- Spring Security -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
-		    <version>5.0.8.RELEASE</version>
+		    </dependency>
+		    <dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		</dependency>	
+		
+		<dependency>
+			 <groupId>org.springframework.integration</groupId>
+			 <artifactId>spring-integration-file</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.integration</groupId>
+		    <artifactId>spring-integration-http</artifactId>
+		</dependency>		
+
+		<dependency>
+		    <groupId>org.springframework.integration</groupId>
+		    <artifactId>spring-integration-ip</artifactId>
+		</dependency>		
+		
+		<dependency>
+		    <groupId>org.springframework.integration</groupId>
+		    <artifactId>spring-integration-stream</artifactId>
 		</dependency>
 		
 	</dependencies>

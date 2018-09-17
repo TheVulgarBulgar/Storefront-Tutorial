@@ -2,7 +2,12 @@ package main;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@EnableWebSecurity
 @Controller
-public class ProductAndCartController {
+public class ProductAndCartController implements ApplicationContextAware{
 
 	@Autowired
 	private ProductService productService;
@@ -91,8 +97,13 @@ public class ProductAndCartController {
 	@GetMapping("delete/{cartItem.id}")
 	public String deleteCartItemFromCart(@PathVariable("cartItem.id") int id) {
 		this.cartService.removeCartItemById(id);
-		System.out.println("this is our story");
 		return "redirect:../home";
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	// product service reponse methods
