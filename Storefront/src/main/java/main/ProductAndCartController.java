@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @EnableWebSecurity
 @Controller
-public class ProductAndCartController implements ApplicationContextAware{
+public class ProductAndCartController{
 
 	@Autowired
 	private ProductService productService;
@@ -99,14 +99,4 @@ public class ProductAndCartController implements ApplicationContextAware{
 		this.cartService.removeCartItemById(id);
 		return "redirect:../home";
 	}
-
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	// product service reponse methods
-	// cart service methods
-	
 }

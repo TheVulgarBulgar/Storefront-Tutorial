@@ -3,6 +3,7 @@
 	xmlns:int="http://www.springframework.org/schema/integration"
 	xmlns:int-mail="http://www.springframework.org/schema/integration/mail"
 	xmlns:int-file="http://www.springframework.org/schema/integration/file"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
 	xsi:schemaLocation="
@@ -13,18 +14,39 @@
 	http://www.springframework.org/schema/integration/stream 
 	http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
 	http://www.springframework.org/schema/integration/file
-	http://www.springframework.org/schema/integration/file/springintegration-file.xsd">
-
-	<int-stream:stdin-channel-adapter id="producer"
-		channel="messageChannel" />
-
-	<int-stream:stdout-channel-adapter
-		id="consumer" channel="messageChannel" append-newline="true" />
-
-	<int:poller id="defaultPoller" default="true"
-		max-messages-per-poll="5" fixed-rate="200" />
+	http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+	
+    <int-file:inbound-channel-adapter id="producer-file-adapter"
+									  channel="inTransformationChannel" 
+									  directory="file:C:\Users\nikola.katardjiev\eclipse-workspace\storefront-tutorial\Storefront\src\main\resources\catalog">
+		<int:poller fixed-rate="200" />
+	</int-file:inbound-channel-adapter>
 
 	<!-- a direct channel -->
-	<int:channel id="messageChannel" />
+	<int:channel id="inTransformationChannel" />
+	
+	<int-file:file-to-string-transformer id="filetostringtransformer" 
+					 input-channel="inTransformationChannel"
+	                 output-channel="outTransformationChannel"/>
+	
+	<!-- a direct channel -->
+	<int:channel id="outTransformationChannel" />
+
+	<int:service-activator input-channel="outTransformationChannel" 
+						   output-channel="outServiceChannel"
+	                       ref="productService" 
+	                       method="printProduct"/>              
+
+	<!-- a direct channel -->
+	<int:channel id="outServiceChannel" />
+	
+	<int-file:outbound-channel-adapter channel="outServiceChannel"
+									   id="consumer-file-adapter" 
+									   delete-source-files="true"
+									   directory="file:C:\Users\nikola.katardjiev\eclipse-workspace\storefront-tutorial\Storefront\src\main\resources\archive" />
+	
+	
 </beans>
 
